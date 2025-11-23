@@ -228,6 +228,17 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
-**Built with 💙 for mental wellness by Team ZenYukti**
+## 💜 Built by Team ZenYukti
 
-*Remember: Seeking professional help is a sign of strength, not weakness.*
+**[ZenYukti](https://zenyukti.in)** - Building innovative solutions for mental wellness and personal growth.
+
+**Connect with us:**
+- 🌐 Website: [zenyukti.in](https://zenyukti.in)
+- 💼 LinkedIn: [linkedin.com/company/zenyukti](https://linkedin.com/company/zenyukti)
+- 🐦 Twitter/X: [@zenyukti](https://x.com/zenyukti)
+- 💬 Discord: [Join our community](https://go.zenyukti.in/discord)
+- 📸 Instagram: [@zenyukti](https://instagram.com/zenyukti)
+
+---
+
+*Remember: Seeking professional help is a sign of strength, not weakness.* 💙

@@ -129,7 +129,15 @@ function Footer() {
   return (
     <footer className="bg-gray-800 text-white py-6 text-center">
       <p className="text-sm">OpenMindWell is open-source. Together, we can make mental health support accessible to all.</p>
-      <p className="text-xs mt-2 text-gray-400">Built with ❤️ by Team ZenYukti</p>
+      <div className="mt-3">
+        <p className="text-xs text-gray-400">Built with ❤️ by Team <a href="https://zenyukti.in" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300">ZenYukti</a></p>
+        <div className="flex justify-center gap-4 mt-2 text-xs">
+          <a href="https://linkedin.com/company/zenyukti" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">LinkedIn</a>
+          <a href="https://x.com/zenyukti" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">Twitter</a>
+          <a href="https://go.zenyukti.in/discord" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">Discord</a>
+          <a href="https://instagram.com/zenyukti" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">Instagram</a>
+        </div>
+      </div>
     </footer>
   );
 }

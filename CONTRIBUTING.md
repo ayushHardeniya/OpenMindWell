@@ -15,3 +15,12 @@ OpenMindWell is a **self-hosted, open-source** mental health support platform bu
 ## Ways to Contribute
 
 See full guidelines in the repository README.md
+
+---
+
+**Connect with Team ZenYukti:**
+- 🌐 [zenyukti.in](https://zenyukti.in)
+- 💼 [LinkedIn](https://linkedin.com/company/zenyukti)
+- 🐦 [Twitter/X](https://x.com/zenyukti)
+- 💬 [Discord Community](https://go.zenyukti.in/discord)
+- 📸 [Instagram](https://instagram.com/zenyukti)
