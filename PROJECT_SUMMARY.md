@@ -10,7 +10,7 @@
 - ✅ AI-powered crisis detection (HuggingFace API + keyword fallback)
 - ✅ Supabase integration (PostgreSQL + Auth)
 - ✅ Rate limiting and security middleware
-- ✅ Deployment configs (Dockerfile, render.yaml)
+- ✅ Deployment configs (Dockerfile for self-hosting)
 - ✅ Database schema with Row Level Security
 
 ### 2. **Frontend** (React 18 + Vite + TypeScript + Tailwind)
@@ -39,7 +39,7 @@
   - Environment variable reference
   - Step-by-step local setup
   - Free service account creation guides
-  - Deployment instructions (Vercel, Render, Railway)
+  - Self-hosting deployment instructions (Docker, VPS)
   - Security and privacy guidelines
   - Contribution guide with code of conduct
   - Future roadmap
@@ -50,8 +50,8 @@
 ### 5. **Deployment Ready**
 - ✅ All environment variable configs
 - ✅ Docker support
-- ✅ Render.com configuration
-- ✅ Vercel configuration
+- ✅ Docker containerization ready
+- ✅ Self-hosting configuration
 - ✅ Health check endpoint
 - ✅ CORS properly configured
 
@@ -90,8 +90,8 @@ Visit: http://localhost:3000
    - Log a habit
 
 4. **Deploy** (optional):
-   - Backend → Render or Railway
-   - Frontend → Vercel
+   - Self-host on VPS (DigitalOcean, Linode, AWS EC2)
+   - Or run on home server / Raspberry Pi
 
 ## 🔒 Safety Features
 
@@ -112,14 +112,13 @@ Visit: http://localhost:3000
 - **Resource Library** - Hotlines, exercises, articles
 - **Volunteer System** - Moderation and support roles
 
-## 📊 100% Free Stack
+## 📊 Self-Hosted Stack
 
-- Supabase (500MB DB, 2GB bandwidth/month)
-- HuggingFace (1000 API calls/day)
-- Vercel (unlimited bandwidth)
-- Render/Railway (750 hours/month)
+- **Database**: Supabase (free tier: 500MB DB, 2GB bandwidth/month) or self-hosted PostgreSQL
+- **AI Detection**: HuggingFace (free tier: 1000 API calls/day) or keyword-based fallback
+- **Hosting**: Your own server (VPS ~$5/month or free on home server)
 
-**Total Cost: $0**
+**Cost: $0-5/month depending on hosting choice**
 
 ## 📁 File Structure
 

@@ -145,9 +145,9 @@ This platform does NOT provide:
 - **Fallback**: Keyword-based pattern matching
 
 ### **Deployment**
-- **Frontend**: Vercel (free tier)
-- **Backend**: Render or Railway (free tier)
-- **Database**: Supabase (free tier)
+- **Hosting**: Self-hosted (VPS, home server, or Raspberry Pi)
+- **Containerization**: Docker & Docker Compose
+- **Database**: Supabase (free tier) or self-hosted PostgreSQL
 - **Version Control**: Git/GitHub
 
 ### **Development Tools**
@@ -173,7 +173,7 @@ This platform does NOT provide:
 │  │  Components: RoomsList, JournalForm, HabitTracker, etc.  │ │
 │  │  API Client: lib/api.ts (REST) + WebSocket client        │ │
 │  └───────────────────────────────────────────────────────────┘ │
-│                     Deployed on: Vercel/Netlify                  │
+│                  Self-hosted on your server                      │
 └───────────┬────────────────────────────────┬────────────────────┘
             │                                │
             │ HTTP/REST                      │ WebSocket (wss://)
@@ -198,7 +198,7 @@ This platform does NOT provide:
 │  │  - Crisis Detection (HuggingFace API + keywords)          │ │
 │  │  - Chat Server (WebSocket management)                      │ │
 │  └────────────────────────────────────────────────────────────┘ │
-│                Deployed on: Render or Railway                    │
+│                  Self-hosted on your server                      │
 └───────────────────────────┬──────────────────────────────────────┘
                             │
                             │ Supabase Client SDK
@@ -301,7 +301,7 @@ openmindwell/
 │   │   └── schema.sql                    # PostgreSQL schema (CRITICAL)
 │   ├── .env.example                      # Backend env template
 │   ├── Dockerfile                        # Docker container config
-│   ├── render.yaml                       # Render deployment config
+│   ├── Dockerfile                        # Docker container config
 │   ├── DEPLOYMENT.md                     # Backend deploy guide
 │   ├── package.json                      # Backend dependencies
 │   └── tsconfig.json                     # TypeScript config
@@ -370,7 +370,7 @@ openmindwell/
 | `RATE_LIMIT_MAX_REQUESTS` | Max requests per window | `100` | ❌ No |
 
 *Falls back to keyword-based crisis detection if not provided.  
-**Defaults to `3001` if not set. Render/Railway will auto-set this in production.
+**Defaults to `3001` if not set. Configure this on your server as needed.
 
 ### Frontend Variables (`frontend/.env`)
 
@@ -382,8 +382,8 @@ openmindwell/
 | `VITE_SUPABASE_ANON_KEY` | Supabase anon key | `eyJhbG...` | ✅ Yes |
 
 **Production values:**
-- `VITE_API_BASE_URL`: `https://your-backend.onrender.com`
-- `VITE_WS_URL`: `wss://your-backend.onrender.com`
+- `VITE_API_BASE_URL`: `https://your-domain.com` (or your server IP)
+- `VITE_WS_URL`: `wss://your-domain.com` (or your server IP)
 
 ---
 
@@ -569,216 +569,281 @@ In Supabase Table Editor, check:
 
 **Optional:** If you skip this, the backend will use keyword-based detection (less accurate but functional).
 
-### Vercel (Frontend Hosting)
+---
 
-**Free Tier Limits:**
-- Unlimited bandwidth
-- 100 GB/month build time
-- 100 deployments/day
-- Custom domains (free SSL)
+## 🌐 Self-Hosting Guide
 
-**Setup:**
-1. Go to [vercel.com](https://vercel.com)
-2. Click "Sign Up"
-3. Use GitHub account (recommended)
-4. Authorize Vercel access
-5. You're ready to deploy!
+### Why Self-Host?
 
-**Deploy Steps:**
-1. Push code to GitHub
-2. In Vercel dashboard, click "Import Project"
-3. Select your GitHub repo
-4. Framework: **Vite**
-5. Root Directory: `frontend`
-6. Add environment variables (from `frontend/.env.local`)
-7. Click "Deploy"
-8. Wait ~2 minutes
-9. Get production URL (e.g., `openmindwell.vercel.app`)
+- **100% Privacy**: Your data stays on your server
+- **No Vendor Lock-in**: Full control over your infrastructure
+- **Zero Recurring Costs**: Run on home server or cheap VPS (~$5/month)
+- **True Open Source**: Own your mental health platform
 
-### Render (Backend Hosting)
+### Hosting Options
 
-**Free Tier Limits:**
-- 750 hours/month (enough for 1 service)
-- Spins down after 15 min inactivity
-- 512 MB RAM
-- Shared CPU
+| Option | Cost | Difficulty | Best For |
+|--------|------|------------|----------|
+| **Home Server / Raspberry Pi** | $0 | Medium | Tech enthusiasts, full control |
+| **DigitalOcean Droplet** | $6/mo | Easy | Reliable, simple setup |
+| **Linode / Vultr VPS** | $5/mo | Easy | Budget-friendly |
+| **AWS EC2 Free Tier** | $0 (1 year) | Hard | Existing AWS users |
+| **Oracle Cloud Free Tier** | $0 (forever) | Medium | Free ARM instance |
 
-**Setup:**
-1. Go to [render.com](https://render.com)
-2. Click "Get Started"
-3. Sign up with GitHub
-4. Authorize Render access
-5. Click "New +" → "Web Service"
-6. Connect your GitHub repo
-7. Settings:
-   - **Name**: `openmindwell-backend`
-   - **Runtime**: Docker
-   - **Dockerfile Path**: `backend/Dockerfile`
-   - **Plan**: Free
-8. Add environment variables (from `backend/.env`)
-9. Click "Create Web Service"
-10. Wait ~5 minutes for build
-11. Get production URL (e.g., `openmindwell-backend.onrender.com`)
+### Prerequisites
 
-**Alternative: Railway**
-
-Similar to Render, also has 500 hours/month free tier.
-
-1. Go to [railway.app](https://railway.app)
-2. Sign up with GitHub
-3. Click "New Project"
-4. Select "Deploy from GitHub repo"
-5. Choose your repo
-6. Railway auto-detects Dockerfile
-7. Add environment variables
-8. Deploy!
+- Linux server (Ubuntu 22.04 recommended)
+- Docker & Docker Compose installed
+- Domain name (optional, can use IP)
+- SSL certificate (Let's Encrypt free)
 
 ---
 
-## 🌐 Deployment Guide
+## 📦 Docker Deployment (Recommended)
 
-### Frontend Deployment (Vercel)
-
-#### Option 1: Automatic (Recommended)
-
-1. **Push to GitHub:**
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
-
-2. **Import to Vercel:**
-   - Go to [vercel.com/dashboard](https://vercel.com/dashboard)
-   - Click "Add New" → "Project"
-   - Select your GitHub repo
-   - **Framework Preset**: Vite
-   - **Root Directory**: `frontend`
-   - Click "Deploy"
-
-3. **Add Environment Variables:**
-   - In Vercel project settings → Environment Variables
-   - Add all from `frontend/.env`:
-     ```
-     VITE_API_BASE_URL=https://your-backend.onrender.com
-     VITE_WS_URL=wss://your-backend.onrender.com
-     VITE_SUPABASE_URL=https://your-project.supabase.co
-     VITE_SUPABASE_ANON_KEY=eyJ...
-     ```
-   - Click "Save"
-
-4. **Redeploy:**
-   - Deployments tab → Click "..." → "Redeploy"
-
-5. **Custom Domain (Optional):**
-   - Settings → Domains
-   - Add your domain (e.g., `openmindwell.org`)
-   - Follow DNS instructions
-
-#### Option 2: CLI
+### Step 1: Prepare Your Server
 
 ```bash
-cd frontend
-npx vercel
-# Follow prompts
-npx vercel --prod
+# Update system
+sudo apt update && sudo apt upgrade -y
+
+# Install Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+# Install Docker Compose
+sudo apt install docker-compose -y
+
+# Add your user to docker group
+sudo usermod -aG docker $USER
+newgrp docker
 ```
 
-### Backend Deployment (Render)
+### Step 2: Clone Repository
 
-#### Using `render.yaml` (Recommended)
+```bash
+git clone https://github.com/ZenYukti/OpenMindWell.git
+cd OpenMindWell
+```
 
-1. **Push code to GitHub** (must include `backend/render.yaml`)
+### Step 3: Configure Environment Variables
 
-2. **Create Web Service:**
-   - Go to [dashboard.render.com](https://dashboard.render.com)
-   - Click "New +" → "Web Service"
-   - Connect GitHub repo
-   - Render detects `render.yaml` automatically
-   - Click "Apply"
+```bash
+# Backend environment
+cp backend/.env.example backend/.env
+nano backend/.env
+# Fill in your Supabase credentials
 
-3. **Set Environment Variables:**
-   - In service settings → Environment
-   - Add variables from `backend/.env`:
-     ```
-     SUPABASE_URL
-     SUPABASE_ANON_KEY
-     SUPABASE_SERVICE_ROLE_KEY
-     HUGGINGFACE_API_TOKEN
-     FRONTEND_URL=https://your-frontend.vercel.app
-     ```
-   - `PORT` is auto-set by Render
+# Frontend environment
+cp frontend/.env.example frontend/.env
+nano frontend/.env
+# Update API URLs to your server domain/IP
+```
 
-4. **Manual Deploy:**
-   - Click "Manual Deploy" → "Deploy latest commit"
-   - Wait ~5 minutes for Docker build
+### Step 4: Create Docker Compose File
 
-5. **Get URL:**
-   - Copy service URL (e.g., `https://openmindwell-backend.onrender.com`)
-   - Update frontend env vars with this URL
+Create `docker-compose.yml` in project root:
 
-#### Using Dockerfile Directly
+```yaml
+version: '3.8'
 
-1. **New Web Service:**
-   - Runtime: Docker
-   - Dockerfile Path: `backend/Dockerfile`
-   - Docker Build Context: `backend`
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./backend/.env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
-2. **Build Command:** (Leave blank, Dockerfile handles it)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - backend
+    restart: unless-stopped
 
-3. **Start Command:** (Leave blank, Dockerfile has `CMD`)
+volumes:
+  backend_data:
+```
 
-### Backend Deployment (Railway - Alternative)
+### Step 5: Deploy
 
-1. **New Project:**
-   - [railway.app/new](https://railway.app/new)
-   - Select "Deploy from GitHub repo"
+```bash
+# Build and start containers
+docker-compose up -d
 
-2. **Settings:**
-   - Root directory: `backend`
-   - Builder: Dockerfile
+# Check logs
+docker-compose logs -f
 
-3. **Variables:**
-   - Add all from `backend/.env`
-   - Railway auto-generates `PORT`
+# Verify running
+docker-compose ps
+```
 
-4. **Deploy:**
-   - Click "Deploy Now"
-   - Get public URL
+Your app is now live at `http://your-server-ip`!
 
-### Post-Deployment Checklist
+---
+
+## 🔐 SSL Setup (Production)
+
+### Using Nginx + Let's Encrypt
+
+```bash
+# Install Nginx
+sudo apt install nginx certbot python3-certbot-nginx -y
+
+# Create Nginx config
+sudo nano /etc/nginx/sites-available/openmindwell
+```
+
+Add this configuration:
+
+```nginx
+server {
+    listen 80;
+    server_name your-domain.com www.your-domain.com;
+
+    # Frontend
+    location / {
+        proxy_pass http://localhost:80;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    # Backend API
+    location /api {
+        proxy_pass http://localhost:3001;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    # WebSocket
+    location /ws {
+        proxy_pass http://localhost:3001;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        proxy_set_header Host $host;
+    }
+}
+```
+
+Enable and get SSL:
+
+```bash
+# Enable site
+sudo ln -s /etc/nginx/sites-available/openmindwell /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
+
+# Get SSL certificate
+sudo certbot --nginx -d your-domain.com -d www.your-domain.com
+```
+
+---
+
+## 🏠 Home Server / Raspberry Pi Deployment
+
+### Requirements
+- Raspberry Pi 4 (4GB+ RAM recommended)
+- MicroSD card (32GB+)
+- Stable internet connection
+- Static local IP or DDNS service
+
+### Setup
+
+1. **Install Raspberry Pi OS Lite (64-bit)**
+   - Use Raspberry Pi Imager
+   - Enable SSH in settings
+
+2. **Follow Docker deployment steps above**
+
+3. **Port Forwarding**
+   - Router settings: Forward ports 80 (HTTP) and 443 (HTTPS) to Pi's local IP
+
+4. **Dynamic DNS (if no static IP)**
+   - Use DuckDNS, No-IP, or Cloudflare
+   - Update DNS automatically with cron job
+
+### Power Management
+
+```bash
+# Auto-restart on reboot
+sudo systemctl enable docker
+docker update --restart unless-stopped $(docker ps -aq)
+```
+
+---
+
+## ✅ Post-Deployment Checklist
 
 - [ ] Frontend loads without errors
-- [ ] Backend health check passes (`/health`)
-- [ ] CORS is configured (frontend can call backend)
-- [ ] WebSocket connects (`wss://` URL)
+- [ ] Backend health check passes (`/health` or `/api/health`)
+- [ ] CORS is configured correctly
+- [ ] WebSocket connects successfully
 - [ ] Database queries work (check Supabase logs)
-- [ ] Crisis detection triggers (test with keyword)
+- [ ] Crisis detection triggers (test with keyword "suicide")
 - [ ] Anonymous sign-in works
+- [ ] SSL certificate is valid (if using HTTPS)
 - [ ] Environment variables are set correctly
+- [ ] Firewall allows ports 80, 443, 3001
 
-### Troubleshooting Deployment
+### Monitoring Your Deployment
+
+```bash
+# Check container status
+docker-compose ps
+
+# View live logs
+docker-compose logs -f
+
+# Restart services
+docker-compose restart
+
+# Update to latest code
+git pull
+docker-compose down
+docker-compose up -d --build
+```
+
+### Troubleshooting
 
 **Frontend won't load:**
-- Check Vercel logs: Deployments → Click deployment → "Building"
-- Verify `VITE_*` env vars are set
-- Ensure `vite.config.ts` has correct settings
+- Check Docker logs: `docker-compose logs frontend`
+- Verify environment variables in `.env`
+- Ensure port 80 is not blocked by firewall
 
-**Backend 500 errors:**
-- Check Render logs: Service → Logs tab
+**Backend errors:**
+- Check logs: `docker-compose logs backend`
 - Verify Supabase credentials are correct
 - Test database connection in Supabase dashboard
-- Check `schema.sql` was applied
+- Ensure `schema.sql` was applied
 
 **WebSocket won't connect:**
-- Ensure `wss://` (not `ws://`) for production
-- Check backend allows WebSocket upgrades
-- Verify CORS allows frontend origin
+- Check Nginx configuration for WebSocket upgrade headers
+- Verify `wss://` protocol in frontend env vars
+- Test direct connection to port 3001
 
 **CORS errors:**
-- Check `FRONTEND_URL` in backend env vars
-- Ensure it matches Vercel domain exactly
-- Include `https://` protocol
+- Check `FRONTEND_URL` in backend `.env`
+- Ensure it matches your domain exactly (include `https://`)
+- Restart backend after env changes
 
 ---
 

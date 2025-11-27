@@ -30,7 +30,7 @@ RUN npm ci --only=production
 # Copy built code from builder
 COPY --from=builder /app/dist ./dist
 
-# Expose port (Render/Railway will override this)
+# Expose port (configure as needed for your server)
 EXPOSE 3001
 
 # Health check
