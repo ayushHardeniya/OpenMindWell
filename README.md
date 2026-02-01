@@ -13,9 +13,6 @@
 
 > **IMPORTANT DISCLAIMER**: OpenMindWell is NOT a substitute for professional mental health care. If you are in crisis, please contact emergency services or a crisis hotline immediately.
 
-> Communication Channel: All project-related communications are directed through the [ZenYukti Server](https://go.zenyukti.in/discord)
-For bug reports, feature requests, development discussions, deployment assistance, and community support, please join our Discord Server.
-
 ## Features
 
 - **Anonymous Chat Rooms** - Join peer support groups without revealing identity
@@ -185,16 +182,6 @@ openmindwell/
 - Anonymous/pseudonymous accounts only
 - Row-level security on all data
 
-## Contributing
-
-We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
-
-Perfect for:
-- Making a social impact
-- Beginners
-- GSoC, Hacktoberfest, WoC programs
-- Portfolio projects
-
 ## Crisis Resources
 
 **If you're in crisis:**
@@ -240,6 +227,10 @@ We welcome contributions from the community! OpenMindWell is built with the miss
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
+### Communication Channel: 
+All project-related communications are directed through the [ZenYukti Server](https://go.zenyukti.in/discord)
+For bug reports, feature requests, development discussions, deployment assistance, and community support, please join our Discord Server.
+
 ---
 
 ## Built by Team ZenYukti
@@ -251,7 +242,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 - LinkedIn: [linkedin.com/company/zenyukti](https://linkedin.com/company/zenyukti)
 - Twitter/X: [@zenyukti](https://x.com/zenyukti)
 - Discord: [Join our community](https://go.zenyukti.in/discord)
-- 📸 Instagram: [@zenyukti](https://instagram.com/zenyukti)
+- Instagram: [@zenyukti](https://instagram.com/zenyukti)
 
 ---
 
