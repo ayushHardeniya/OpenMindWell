@@ -6,6 +6,12 @@ on:
   issues:
     types: [opened]
 
+  permissions:
+    contents: read
+    issues: write
+    pull-requests: write
+    statuses: write
+
 jobs:
   # JOB 1: Welcome for EVERY Issue and PR (No first-time filter)
   welcome_test:
